@@ -36,7 +36,7 @@ class CorpusObject(list):
         self.description = corpus.get("description")
 
 
-def where_list_key_contains_any(self, key_name, match_list):
+    def where_list_key_contains_any(self, key_name, match_list):
         """
         Returns records with a list stored in a given <key_name> that
         contains any *exact* items in a given <match_list>.
