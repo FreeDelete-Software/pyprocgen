@@ -49,3 +49,14 @@ class CorpusObject(list):
         return results
 
 
+    def combine_all_lists(self, key_name):
+        """
+        Combines lists from all records stored in a given <key_name>.
+        """
+        results = []
+        for record in self:
+            for item in record[key_name]:
+                if not (item in results):
+                    results.append(item)
+        results.sort()
+        return results
