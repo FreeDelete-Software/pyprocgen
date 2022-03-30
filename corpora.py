@@ -19,8 +19,9 @@ class CorpusObject(list):
         For example:
         'my_corpus.json' should contain a dictionary (hash table) which has
         a 'description' key with a string-type value and a 'my_corpus' key 
-        with a list(array)-type value. The json file should be in the same
-        directory as this module.
+        with a list(array)-type value. The json file should be in the ignored
+        'corpora' directory, ideally copied or cloned from:
+        https://github.com/FreeDelete-Software/corpora
 
         Importing this file would look like this:
         CorpusObject.import_corpus("my_corpus")
@@ -29,7 +30,7 @@ class CorpusObject(list):
         with open(filename) as json_file:
             corpus = json.load(json_file)
 
-        # Extend the interpretations list into self.
+        # Extend the data into self.
         self.extend(corpus.get(corpus_name))
 
         # Set attributes
