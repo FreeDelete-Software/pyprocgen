@@ -61,3 +61,13 @@ class CorpusObject(list):
                     results.append(item)
         results.sort()
         return results
+
+
+    def all_values_in_key(self, key_name):
+        """
+        Returns a list of values from all records stored in a specified <key_name>
+        """
+        results = []
+        for record in self:
+            results.append(record[key_name])
+
