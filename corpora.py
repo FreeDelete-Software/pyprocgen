@@ -70,4 +70,6 @@ class CorpusObject(list):
         results = []
         for record in self:
             results.append(record[key_name])
+        return results
+
 
