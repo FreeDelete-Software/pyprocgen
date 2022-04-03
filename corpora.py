@@ -1,5 +1,15 @@
 """
 Utilities for handling corpora json files.
+
+Example data is provided under CC0 terms here:
+https://github.com/FreeDelete-Software/corpora
+
+Important notes on data files:
+
+- JSON data is intended to be covered under separate copyright terms.
+- All JSON files should be stored in the 'corpora' directory with this module.
+- Data files which are improperly formatted *will* cause issues. 
+- The unit tests in test_corpora.py perform some basic sanity checks on data.
 """
 
 import json
@@ -13,18 +23,10 @@ class CorpusObject(list):
         """
         Imports a corpus by name into the object.
 
-        !NOTE! - This won't work if you specify a file extension or use
-        improperly formatted files.
+        !NOTE! - This won't work if you specify a path or extension. 
 
-        For example:
-        'my_corpus.json' should contain a dictionary (hash table) which has
-        a 'description' key with a string-type value and a 'my_corpus' key 
-        with a list(array)-type value. The json file should be in the ignored
-        'corpora' directory, ideally copied or cloned from:
-        https://github.com/FreeDelete-Software/corpora
-
-        Importing this file would look like this:
-        CorpusObject.import_corpus("my_corpus")
+        Importing my_corpus.json would look like this:
+        my_corpus_object.import_corpus("my_corpus")
         """
         filename = "corpora/%s.json" % corpus_name
         with open(filename) as json_file:
