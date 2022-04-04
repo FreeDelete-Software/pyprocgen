@@ -7,7 +7,7 @@ https://github.com/FreeDelete-Software/corpora
 Important notes on data files:
 
 - JSON data is intended to be covered under separate copyright terms.
-- All JSON files should be stored in the 'corpora' directory with this module.
+- All JSON files should be stored in the 'corpora' directory.
 - Data files which are improperly formatted *will* cause issues. 
 - The unit tests in test_corpora.py perform some basic sanity checks on data.
 """
@@ -39,7 +39,7 @@ class CorpusObject(list):
         self.description = corpus.get("description")
 
 
-    def where_list_key_contains_any(self, key_name, match_list):
+    def get_records_with_list_items(self, key_name, match_list):
         """
         Returns records with a list stored in a given <key_name> that
         contains any *exact* items in a given <match_list>.
@@ -52,7 +52,7 @@ class CorpusObject(list):
         return results
 
 
-    def combine_all_lists(self, key_name):
+    def get_all_list_items_combined(self, key_name):
         """
         Combines lists from all records stored in a given <key_name>.
         """
@@ -65,7 +65,7 @@ class CorpusObject(list):
         return results
 
 
-    def all_values_in_key(self, key_name):
+    def get_values_in_key(self, key_name):
         """
         Returns a list of values from all records stored in a specified <key_name>
         """
