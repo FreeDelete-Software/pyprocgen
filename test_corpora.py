@@ -53,6 +53,13 @@ class TestCorpusObjectImport(unittest.TestCase):
         self.corpus_obj.import_corpus(DEFAULT_CORPUS)
         self.assertGreater(len(self.corpus_obj), 0)
 
+    def test_import_wipes_existing_data(self):
+        self.corpus_obj.import_corpus(DEFAULT_CORPUS)
+        first_len = len(self.corpus_obj)
+        self.corpus_obj.import_corpus(DEFAULT_CORPUS)
+        second_len = len(self.corpus_obj)
+        self.assertEqual(first_len, second_len)
+
 
 if __name__ == '__main__':
 
