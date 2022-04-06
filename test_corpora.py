@@ -12,7 +12,7 @@ from os.path import exists
 import json
 
 
-# This should be set to a *compatible* corpus name with a more complex structure.
+# This can be set to any corpus name to validate its contents
 DEFAULT_CORPUS = "tarot"
 
 
@@ -45,7 +45,9 @@ class TestDataValidity(unittest.TestCase):
 
 
 class TestCorpusObjectImport(unittest.TestCase):
-
+    """
+    Tests for the import_corpus method.
+    """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
 
@@ -61,10 +63,82 @@ class TestCorpusObjectImport(unittest.TestCase):
         self.assertEqual(first_len, second_len)
 
 
-if __name__ == '__main__':
+class TestGetRecordsWithListItems(unittest.TestCase):
+    """
+    Tests the 'get_records_with_list_items' method of CorpusObject.
+    """
+    def setUp(self):
+        self.corpus_obj = corpora.CorpusObject()
+        self.corpus_obj.import_corpus(DEFAULT_CORPUS)
+        self.str_key_names = []
+        self.list_key_names = []
+        for key_name in self.corpus_obj[0].keys():
+            if isinstance(self.corpus_obj[0].get(key_name), str):
+                self.str_key_names.append(key_name)
+            if isinstance(self.corpus_obj[0].get(key_name), list):
+                self.list_key_names.append(key_name)
+            
+    def test_grwli_returns_known_match(self):
+        key_name = self.list_key_names[0]
+        known_match_strings = self.corpus_obj[0][key_name]
+        results = self.corpus_obj.get_records_with_list_items(
+            key_name,
+            [known_match_strings[0]]
+        )
+        self.assertGreater(len(results), 0)
 
+
+
+class TestGetAllListItemsCombined(unittest.TestCase):
+    """
+    Tests for the 'get_all_list_items_combined' method.
+    """
+    def setUp(self):
+        self.corpus_obj = corpora.CorpusObject()
+        self.corpus_obj.import_corpus(DEFAULT_CORPUS)
+        self.str_key_names = []
+        self.list_key_names = []
+        for key_name in self.corpus_obj[0].keys():
+            if isinstance(self.corpus_obj[0].get(key_name), str):
+                self.str_key_names.append(key_name)
+            if isinstance(self.corpus_obj[0].get(key_name), list):
+                self.list_key_names.append(key_name)
+
+    def test_galic_results_contain_known_item(self):
+        key_name = self.list_key_names[0]
+        known_items = self.corpus_obj[0][key_name]
+        self.assertIn(
+            known_items[0],
+            self.corpus_obj.get_all_list_items_combined(key_name)
+        )
+
+
+class TestGetValuesInKey(unittest.TestCase):
+    """
+    Tests for the 'get_values_in_key' method.
+    """
+    def setUp(self):
+        self.corpus_obj = corpora.CorpusObject()
+        self.corpus_obj.import_corpus(DEFAULT_CORPUS)
+        self.str_key_names = []
+        self.list_key_names = []
+        for key_name in self.corpus_obj[0].keys():
+            if isinstance(self.corpus_obj[0].get(key_name), str):
+                self.str_key_names.append(key_name)
+            if isinstance(self.corpus_obj[0].get(key_name), list):
+                self.list_key_names.append(key_name)
+
+    def test_gvik_results_are_same_len_as_corpus(self):
+        self.assertEqual(
+            len(self.corpus_obj),
+            len(self.corpus_obj.get_values_in_key(self.str_key_names[0]))
+        )
+
+
+
+if __name__ == '__main__':
     banner = '''
-                                                                   
+
                  ____  __  ______  _________  _________ ____  ____ 
                 / __ \\/ / / / __ \\/ ___/ __ \\/ ___/ __ `/ _ \\/ __ \\
                / /_/ / /_/ / /_/ / /  / /_/ / /__/ /_/ /  __/ / / /
