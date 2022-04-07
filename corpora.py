@@ -32,6 +32,9 @@ class CorpusObject(list):
         with open(filename) as json_file:
             corpus = json.load(json_file)
 
+        # Clear Existing contents
+        self.clear()
+
         # Extend the data into self.
         self.extend(corpus.get(corpus_name))
 
