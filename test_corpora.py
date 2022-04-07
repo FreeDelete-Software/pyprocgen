@@ -16,7 +16,7 @@ import json
 DEFAULT_CORPUS = "tarot"
 
 
-class TestDataValidity(unittest.TestCase):
+class Test001DataValidity(unittest.TestCase):
     """
     Valid data is important to how everything functions. Assertions
     here help to ensure that data files will not cause problems.
@@ -44,7 +44,7 @@ class TestDataValidity(unittest.TestCase):
         self.assertIsInstance(this_corpus[0], dict)
 
 
-class TestCorpusObjectImport(unittest.TestCase):
+class Test100CorpusObjectImport(unittest.TestCase):
     """
     Tests for the import_corpus method.
     """
@@ -63,7 +63,7 @@ class TestCorpusObjectImport(unittest.TestCase):
         self.assertEqual(first_len, second_len)
 
 
-class TestGetRecordsWithListItems(unittest.TestCase):
+class Test200GetRecordsWithListItems(unittest.TestCase):
     """
     Tests the 'get_records_with_list_items' method of CorpusObject.
     """
@@ -89,7 +89,7 @@ class TestGetRecordsWithListItems(unittest.TestCase):
 
 
 
-class TestGetAllListItemsCombined(unittest.TestCase):
+class Test300GetAllListItemsCombined(unittest.TestCase):
     """
     Tests for the 'get_all_list_items_combined' method.
     """
@@ -113,7 +113,7 @@ class TestGetAllListItemsCombined(unittest.TestCase):
         )
 
 
-class TestGetValuesInKey(unittest.TestCase):
+class Test400GetValuesInKey(unittest.TestCase):
     """
     Tests for the 'get_values_in_key' method.
     """
