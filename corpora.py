@@ -42,39 +42,39 @@ class CorpusObject(list):
         self.description = corpus.get("description")
 
 
-    def get_records_with_list_items(self, key_name, match_list):
+    def get_field_matches(self, field_name, match_list):
         """
-        Returns records with a list stored in a given <key_name> that
+        Returns records with a given <field_name> that
         contains any *exact* items in a given <match_list>.
         """
         results = []
         for record in self:
             for item in match_list:
-                if (item in record[key_name]) and not (record in results):
+                if (item in record[field_name]) and not (record in results):
                         results.append(record)
         return results
 
 
-    def get_all_list_items_combined(self, key_name):
+    def get_combined_list_field(self, field_name):
         """
-        Combines lists from all records stored in a given <key_name>.
+        Combines lists from all records stored in a given <field_name>.
         """
         results = []
         for record in self:
-            for item in record[key_name]:
+            for item in record[field_name]:
                 if not (item in results):
                     results.append(item)
         results.sort()
         return results
 
 
-    def get_values_in_key(self, key_name):
+    def get_all_field_values(self, field_name):
         """
-        Returns a list of values from all records stored in a specified <key_name>
+        Returns a list of values from all records stored in a specified <field_name>
         """
         results = []
         for record in self:
-            results.append(record[key_name])
+            results.append(record[field_name])
         return results
 
 

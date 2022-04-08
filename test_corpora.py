@@ -44,9 +44,9 @@ class Test001DataValidity(unittest.TestCase):
         self.assertIsInstance(this_corpus[0], dict)
 
 
-class Test100CorpusObjectImport(unittest.TestCase):
+class Test100ImportCorpus(unittest.TestCase):
     """
-    Tests for the import_corpus method.
+    Tests for the 'import_corpus' method.
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
@@ -63,9 +63,9 @@ class Test100CorpusObjectImport(unittest.TestCase):
         self.assertEqual(first_len, second_len)
 
 
-class Test200GetRecordsWithListItems(unittest.TestCase):
+class Test200GetFieldMatches(unittest.TestCase):
     """
-    Tests the 'get_records_with_list_items' method of CorpusObject.
+    Tests the 'get_field_matches' method of CorpusObject.
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
@@ -78,20 +78,20 @@ class Test200GetRecordsWithListItems(unittest.TestCase):
             if isinstance(self.corpus_obj[0].get(key_name), list):
                 self.list_key_names.append(key_name)
             
-    def test_grwli_returns_known_match(self):
-        key_name = self.list_key_names[0]
-        known_match_strings = self.corpus_obj[0][key_name]
-        results = self.corpus_obj.get_records_with_list_items(
-            key_name,
+    def test_gfm_returns_known_match(self):
+        field_name = self.list_key_names[0]
+        known_match_strings = self.corpus_obj[0][field_name]
+        results = self.corpus_obj.get_field_matches(
+            field_name,
             [known_match_strings[0]]
         )
         self.assertGreater(len(results), 0)
 
 
 
-class Test300GetAllListItemsCombined(unittest.TestCase):
+class Test300GetCombinedListField(unittest.TestCase):
     """
-    Tests for the 'get_all_list_items_combined' method.
+    Tests for the 'get_combined_list_field' method.
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
@@ -104,18 +104,18 @@ class Test300GetAllListItemsCombined(unittest.TestCase):
             if isinstance(self.corpus_obj[0].get(key_name), list):
                 self.list_key_names.append(key_name)
 
-    def test_galic_results_contain_known_item(self):
-        key_name = self.list_key_names[0]
-        known_items = self.corpus_obj[0][key_name]
+    def test_gclf_results_contain_known_item(self):
+        field_name = self.list_key_names[0]
+        known_items = self.corpus_obj[0][field_name]
         self.assertIn(
             known_items[0],
-            self.corpus_obj.get_all_list_items_combined(key_name)
+            self.corpus_obj.get_combined_list_field(field_name)
         )
 
 
-class Test400GetValuesInKey(unittest.TestCase):
+class Test400GetAllFieldValues(unittest.TestCase):
     """
-    Tests for the 'get_values_in_key' method.
+    Tests for the 'get_all_field_values' method.
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
@@ -128,10 +128,10 @@ class Test400GetValuesInKey(unittest.TestCase):
             if isinstance(self.corpus_obj[0].get(key_name), list):
                 self.list_key_names.append(key_name)
 
-    def test_gvik_results_are_same_len_as_corpus(self):
+    def test_gafv_results_are_same_len_as_corpus(self):
         self.assertEqual(
             len(self.corpus_obj),
-            len(self.corpus_obj.get_values_in_key(self.str_key_names[0]))
+            len(self.corpus_obj.get_all_field_values(self.str_key_names[0]))
         )
 
 
