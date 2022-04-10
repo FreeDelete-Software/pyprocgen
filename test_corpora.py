@@ -77,13 +77,24 @@ class Test200GetFieldMatches(unittest.TestCase):
                 self.str_key_names.append(key_name)
             if isinstance(self.corpus_obj[0].get(key_name), list):
                 self.list_key_names.append(key_name)
-            
-    def test_gfm_returns_known_match(self):
+
+
+    def test_gfm_returns_known_match_in_list_field(self):
         field_name = self.list_key_names[0]
         known_match_strings = self.corpus_obj[0][field_name]
         results = self.corpus_obj.get_field_matches(
             field_name,
             [known_match_strings[0]]
+        )
+        self.assertGreater(len(results), 0)
+
+
+    def test_gfm_returns_known_match_in_string_field(self):
+        field_name = self.str_key_names[0]
+        known_match_string = self.corpus_obj[0][field_name]
+        results = self.corpus_obj.get_field_matches(
+            field_name,
+            [known_match_string]
         )
         self.assertGreater(len(results), 0)
 
