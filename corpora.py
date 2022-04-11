@@ -78,3 +78,6 @@ class CorpusObject(list):
         return results
 
 
+class CorpusRecord(dict):
+    """Currently just a placeholder"""
+    pass

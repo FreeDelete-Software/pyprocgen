@@ -50,17 +50,23 @@ class Test100ImportCorpus(unittest.TestCase):
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
-
-    def test_obj_can_import_valid_corpus(self):
         self.corpus_obj.import_corpus(DEFAULT_CORPUS)
+
+    def test_obj_can_import_something(self):
         self.assertGreater(len(self.corpus_obj), 0)
 
     def test_import_wipes_existing_data(self):
-        self.corpus_obj.import_corpus(DEFAULT_CORPUS)
         first_len = len(self.corpus_obj)
         self.corpus_obj.import_corpus(DEFAULT_CORPUS)
         second_len = len(self.corpus_obj)
         self.assertEqual(first_len, second_len)
+
+    def test_imported_list_items_are_corpusrecords(self):
+        not_corpusrecords = []
+        for list_item in self.corpus_obj:
+            if not isinstance(list_item, corpora.CorpusRecord):
+                not_corpusrecords.append(list_item)
+        self.assertEqual(not_corpusrecords, [])
 
 
 class Test200GetFieldMatches(unittest.TestCase):
