@@ -30,16 +30,19 @@ class CorpusObject(list):
         """
         filename = "corpora/%s.json" % corpus_name
         with open(filename) as json_file:
-            corpus = json.load(json_file)
+            corpus_file = json.load(json_file)
 
         # Clear Existing contents
         self.clear()
 
-        # Extend the data into self.
-        self.extend(corpus.get(corpus_name))
+        # Convert data items to CorpusRecord class
+        for item in corpus_file.get(corpus_name):
+            if isinstance(item, dict):
+                record = CorpusRecord(item)
+                self.append(record)
 
         # Set attributes
-        self.description = corpus.get("description")
+        self.description = corpus_file.get("description")
 
 
     def get_field_matches(self, field_name, match_list):
