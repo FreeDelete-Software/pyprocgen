@@ -39,9 +39,12 @@ class Test001DataValidity(unittest.TestCase):
     def test_corpus_data_is_list(self):
         self.assertIsInstance(self.loaded_data.get(DEFAULT_CORPUS), list)
 
-    def test_first_corpus_item_is_dict(self):
-        this_corpus = self.loaded_data.get(DEFAULT_CORPUS)
-        self.assertIsInstance(this_corpus[0], dict)
+    def test_all_corpus_items_are_dicts(self):
+        not_dicts = []
+        for list_item in self.loaded_data.get(DEFAULT_CORPUS):
+            if not isinstance(list_item, dict):
+                not_dicts.append(list_item)
+        self.assertEqual(not_dicts, [])
 
 
 class Test100ImportCorpus(unittest.TestCase):
