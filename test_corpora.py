@@ -157,18 +157,19 @@ class Test400GetAllFieldValues(unittest.TestCase):
 
 
 if __name__ == '__main__':
+    with open('banner.txt', 'r') as f:
+        print(f.read())
     banner = '''
+    _   _   _   _
+   / \\ / \\ / \\ / \\
+  ( U | N | I | T )
+   \\_/ \\_/ \\_/ \\_/
+  _   _   _   _   _
+ / \\ / \\ / \\ / \\ / \\
+( T | E | S | T | S )
+ \\_/ \\_/ \\_/ \\_/ \\_/
 
-                 ____  __  ______  _________  _________ ____  ____ 
-                / __ \\/ / / / __ \\/ ___/ __ \\/ ___/ __ `/ _ \\/ __ \\
-               / /_/ / /_/ / /_/ / /  / /_/ / /__/ /_/ /  __/ / / /
-              / .___/\\__, / .___/_/   \\____/\\___/\\__, /\\___/_/ /_/ 
-             /_/    /____/_/                    /____/
-                      _   _   _   _     _   _   _   _   _  
-                     / \\ / \\ / \\ / \\   / \\ / \\ / \\ / \\ / \\ 
-                    ( U | N | I | T ) ( T | E | S | T | S )
-                     \\_/ \\_/ \\_/ \\_/   \\_/ \\_/ \\_/ \\_/ \\_/
-                      for corpora.py and data validation
+for corpora.py and data validation
 '''
     print(banner)
     unittest.main()
