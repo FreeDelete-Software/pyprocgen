@@ -13,7 +13,7 @@ import json
 
 
 # This can be set to any corpus name to validate its contents
-TEST_CORPUS = "tarot"
+CORPUS_NAME = "tarot"
 
 
 class Test001DataValidity(unittest.TestCase):
@@ -23,7 +23,7 @@ class Test001DataValidity(unittest.TestCase):
     """
 
     def setUp(self):
-        self.file_name = "corpora/%s.json" % TEST_CORPUS
+        self.file_name = "corpora/%s.json" % CORPUS_NAME
         with open(self.file_name) as json_file:
             self.loaded_data = json.load(json_file)
 
@@ -34,14 +34,14 @@ class Test001DataValidity(unittest.TestCase):
         self.assertIsInstance(self.loaded_data, dict)
 
     def test_valid_corpus_keyname(self):
-        self.assertIn(TEST_CORPUS, self.loaded_data.keys())
+        self.assertIn(CORPUS_NAME, self.loaded_data.keys())
 
     def test_corpus_data_is_list(self):
-        self.assertIsInstance(self.loaded_data.get(TEST_CORPUS), list)
+        self.assertIsInstance(self.loaded_data.get(CORPUS_NAME), list)
 
     def test_all_corpus_items_are_dicts(self):
         not_dicts = []
-        for list_item in self.loaded_data.get(TEST_CORPUS):
+        for list_item in self.loaded_data.get(CORPUS_NAME):
             if not isinstance(list_item, dict):
                 not_dicts.append(list_item)
         self.assertEqual(not_dicts, [])
@@ -53,14 +53,14 @@ class Test100ImportCorpus(unittest.TestCase):
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
-        self.corpus_obj.import_corpus(TEST_CORPUS)
+        self.corpus_obj.import_corpus(CORPUS_NAME)
 
     def test_obj_can_import_something(self):
         self.assertGreater(len(self.corpus_obj), 0)
 
     def test_import_wipes_existing_data(self):
         first_len = len(self.corpus_obj)
-        self.corpus_obj.import_corpus(TEST_CORPUS)
+        self.corpus_obj.import_corpus(CORPUS_NAME)
         second_len = len(self.corpus_obj)
         self.assertEqual(first_len, second_len)
 
@@ -78,7 +78,7 @@ class Test200GetFieldMatches(unittest.TestCase):
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
-        self.corpus_obj.import_corpus(TEST_CORPUS)
+        self.corpus_obj.import_corpus(CORPUS_NAME)
         self.str_key_names = []
         self.list_key_names = []
         for key_name in self.corpus_obj[0].keys():
@@ -115,7 +115,7 @@ class Test300GetCombinedListField(unittest.TestCase):
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
-        self.corpus_obj.import_corpus(TEST_CORPUS)
+        self.corpus_obj.import_corpus(CORPUS_NAME)
         self.str_key_names = []
         self.list_key_names = []
         for key_name in self.corpus_obj[0].keys():
@@ -139,7 +139,7 @@ class Test400GetAllFieldValues(unittest.TestCase):
     """
     def setUp(self):
         self.corpus_obj = corpora.CorpusObject()
-        self.corpus_obj.import_corpus(TEST_CORPUS)
+        self.corpus_obj.import_corpus(CORPUS_NAME)
         self.str_key_names = []
         self.list_key_names = []
         for key_name in self.corpus_obj[0].keys():
