@@ -71,6 +71,9 @@ class Test100ImportCorpus(unittest.TestCase):
                 not_corpusrecords.append(list_item)
         self.assertEqual(not_corpusrecords, [])
 
+    def test_import_sets_corpus_name(self):
+        self.assertEqual(self.corpus_obj.name, CORPUS_NAME)
+
 
 class Test200GetFieldMatches(unittest.TestCase):
     """
