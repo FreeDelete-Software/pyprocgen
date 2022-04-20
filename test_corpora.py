@@ -158,6 +158,51 @@ class Test400GetAllFieldValues(unittest.TestCase):
         )
 
 
+class Test500CorpusRecord(unittest.TestCase):
+    """Tests for the 'CorpusRecord' class"""
+    def setUp(self):
+        self.record_obj = corpora.CorpusRecord()
+
+    def test_fresh_record_has_edges_attr_as_none(self):
+        self.assertEqual(self.record_obj.edges, None)
+
+    def test_record_can_add_to_blank_edges_attr(self):
+        self.record_obj.add_edge("test.fieldspace", 0)
+        self.assertEqual(
+            self.record_obj.edges,
+            {"test.fieldspace": [0]}
+        )
+
+    def test_record_can_add_edge_to_existing_fieldspace(self):
+        self.record_obj.add_edge("test.fieldspace", 0)
+        self.record_obj.add_edge("test.fieldspace", 1)
+        self.assertEqual(
+            self.record_obj.edges,
+            {"test.fieldspace": [0, 1]}
+        )
+
+    def test_record_can_add_edges_with_multiple_fieldspaces(self):
+        self.record_obj.add_edge("test.fieldspace", 0)
+        self.record_obj.add_edge("other.fieldspace", 0)
+        self.assertEqual(
+            self.record_obj.edges,
+            {"test.fieldspace": [0], "other.fieldspace": [0]}
+        )
+
+    def test_record_can_remove_single_edge(self):
+        self.record_obj.add_edge("test.fieldspace", 0)
+        self.record_obj.add_edge("test.fieldspace", 1)
+        self.record_obj.rem_edge("test.fieldspace", 1)
+        self.assertEqual(
+            self.record_obj.edges,
+            {"test.fieldspace": [0]}
+        )
+
+    def test_removing_the_only_edge_sets_attr_to_none(self):
+        self.record_obj.add_edge("test.fieldspace", 1)
+        self.record_obj.rem_edge("test.fieldspace", 1)
+        self.assertEqual(self.record_obj.edges, None)
+
 
 if __name__ == '__main__':
     with open('banner.txt', 'r') as f:
