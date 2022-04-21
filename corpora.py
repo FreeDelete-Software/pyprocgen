@@ -19,6 +19,10 @@ class CorpusObject(list):
     Object which represents the contents of a corpus. 
     """
 
+    def __init__(self):
+        self.name = None
+
+
     def import_corpus(self, corpus_name):
         """
         Imports a corpus by name into the object.
@@ -43,6 +47,7 @@ class CorpusObject(list):
 
         # Set attributes
         self.description = corpus_file.get("description")
+        self.name = corpus_name
 
 
     def get_field_matches(self, field_name, match_list):
