@@ -84,3 +84,8 @@ class CorpusObject(list):
 class CorpusRecord(dict):
     """Currently just a placeholder"""
     pass
+
+
+class CompendiumObject(dict):
+    """Currently just a placeholder"""
+    pass

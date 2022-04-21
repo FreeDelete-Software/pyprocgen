@@ -204,6 +204,25 @@ class Test500CorpusRecord(unittest.TestCase):
         self.assertEqual(self.record_obj.edges, None)
 
 
+class Test600CompendiumObject(unittest.TestCase):
+    """Tests for the 'CompendiumObject' class"""
+
+    def setUp(self):
+        self.compendium = corpora.CompendiumObject()
+
+    def test_compendium_can_import_all_json_files(self):
+        self.compendium.add_all_corpora()
+        self.assertGreater(len(compendium.keys()), 0)
+
+    def test_compendium_can_import_single_corpus_by_name(self):
+        self.compendium.add_corpus(CORPUS_NAME)
+        self.assertIn(CORPUS_NAME, compendium.keys())
+
+    def PLACEHOLDER_test_compendium_can_generate_adjacency_list(self):
+        """I don't know how to test this yet."""
+        pass
+
+
 if __name__ == '__main__':
     with open('banner.txt', 'r') as f:
         print(f.read())
