@@ -43,6 +43,7 @@ class CorpusObject(list):
 
         # Set attributes
         self.description = corpus_file.get("description")
+        self.name = corpus_name
 
 
     def get_field_matches(self, field_name, match_list):
