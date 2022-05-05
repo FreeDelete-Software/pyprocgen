@@ -163,9 +163,6 @@ class Test500CorpusRecord(unittest.TestCase):
     def setUp(self):
         self.record_obj = corpora.CorpusRecord()
 
-    def test_fresh_record_has_edges_attr_as_none(self):
-        self.assertEqual(self.record_obj.edges, None)
-
     def test_record_can_add_to_blank_edges_attr(self):
         self.record_obj.add_edge("test.fieldspace", 0)
         self.assertEqual(
