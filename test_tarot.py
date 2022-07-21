@@ -9,12 +9,18 @@ Unit tests for tarot.py. Requires corpora JSON data.
 import unittest
 import tarot
 
-class Test100GetDataFromCardname(unittest.TestCase):
-    def setUp(self):
-        self.the_data = tarot.get_data_from_cardname("The Fool")
 
-    def test_data_is_dict(self):
-        self.assertIsInstance(self.the_data, dict)
+# REMINDER:
+# The current "list of dictionaries" structure that was adopted from the
+# copied tarot data is somewhat confusing and may need to be changed. It might
+# be best to make corpora.CorpusObject() into a dict. More research needed.
+
+class Test100GetDataFromCardnames(unittest.TestCase):
+    def setUp(self):
+        self.the_data = tarot.get_data_from_cardnames(["The Fool"])
+
+    def test_returned_data_is_dict(self):
+        self.assertIsInstance(self.the_data, list)
 
 
 if __name__ == '__main__':
